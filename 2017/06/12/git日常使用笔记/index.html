@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Author Name,name@example.com"><title>吾林の手扎</title><meta name="description" content="1、创建版本库使用mkdir新建一个空目录，在cd进入该目录进行git初始化。初始化后，执行ls -ah可以看到.git文件，这意味着你已经成功的初始化了一个空的git仓库。
+git init2、工作区和版本库（Stage，HEAD）工作区就是我们编写文件所在地方，版本库就是.git里面，又分暂存区"><meta name="keywords" content="Hexo,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.1"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x_2.jpg" style="width:127px;border-radius: 50%;"><h3 title=""><a href="/">吾林の手扎</a></h3><div class="description"><p>操千曲而后晓声，观千剑而后识器。</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li><li><a href="http://github.com/qiuyshu" target="_blank" rel="noopener"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>感谢</span></a><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben 和</a><a href="https://hexo.io/zh-cn/" target="_blank">&nbsp;Hexo</a></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="avatar"><img src="https://avatars2.githubusercontent.com/u/6949358?s=400&amp;u=1aa8de025cd65ff325eddec5c1b8858441c0a211&amp;v=4"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>git日常使用笔记</a></h3></div><div class="post-content"><h5 id="1、创建版本库"><a href="#1、创建版本库" class="headerlink" title="1、创建版本库"></a>1、创建版本库</h5><p>使用mkdir新建一个空目录，在cd进入该目录进行git初始化。初始化后，执行ls -ah可以看到.git文件，这意味着你已经成功的初始化了一个空的git仓库。</p>
+<pre><code>git init</code></pre><h5 id="2、工作区和版本库（Stage，HEAD）"><a href="#2、工作区和版本库（Stage，HEAD）" class="headerlink" title="2、工作区和版本库（Stage，HEAD）"></a>2、工作区和版本库（Stage，HEAD）</h5><p>工作区就是我们编写文件所在地方，版本库就是.git里面，又分暂存区和分支。</p>
+<ul>
+<li>通过git status可以查看到修改，新增或者是删除的文件；</li>
+<li>通过git add <filename> 或者是git add .将修改文件添加到暂存区（前者只能添加对应文件，后者添加修改过的所有文件）；</filename></li>
+<li>通过git commit -m “备注xxx”，可以将暂存的内容添加到分支也就是版本库；</li>
+<li>git checkout – file 撤销暂存</li>
+</ul>
+<pre><code>git log // 查看commit状态
+git status // 查看修改文件状态
+git add . // 暂存所有修改文件
+git checkout -- xxx // 取消暂存
+git commit -m &quot;xxxx&quot; // 提交到本地库</code></pre><h5 id="3、git远程库的添加与推送"><a href="#3、git远程库的添加与推送" class="headerlink" title="3、git远程库的添加与推送"></a>3、git远程库的添加与推送</h5><p>git可以通过命令添加远程仓库</p>
+<pre><code>git remote add origin git@xxx:xxx.git // 添加远程库</code></pre><p>再是把本地库的代码推送到远程库上, 第一次推送加上-u参数可以将本地master和远程master分支关联起来，以后的推送可以不使用-u。</p>
+<pre><code>git push -u origin master // 推送到远程库</code></pre><h5 id="4、分支管理"><a href="#4、分支管理" class="headerlink" title="4、分支管理"></a>4、分支管理</h5><p>（1）分支的创建与合并</p>
+<p>-查看分支，git branch -a可以查看到所有本地和远程分支，<br>带*号是当前所在分支，remotes/origin/xxx是远程分支</p>
+<pre><code>git branch -a // 查看所有分支
+git branch // 查看本地分支</code></pre><p>-支创建与切换，以及合并</p>
+<pre><code>git checkout -b xxx // 创建并切换到该分支
+git branch xxx // 创建该分支
+git checkout xxx // 切换到该分支
+git merge xxx // 合并其他分支到当前分支</code></pre><p>-远程分支创建</p>
+<pre><code>git push origin xxx:xxx // 将本地分支推送的远程，相当于创建一个远程分支</code></pre><p>（2）分支删除</p>
+<p>-本地分支删除</p>
+<pre><code>git branch -d xxx // 删除分支
+git branch -D xxx // 强制删除分支</code></pre><p>-远程分支删除</p>
+<pre><code>git push origin :xxx // 第一种：推送空分支到远程分支就相当于删除远程分支
+git push origin --delete xxx //第二种：删除远程分支</code></pre><h5 id="5、技巧与使用"><a href="#5、技巧与使用" class="headerlink" title="5、技巧与使用"></a>5、技巧与使用</h5><p>（1）开发进行到一半，要进行其他的开发工作，当前代码又不能提交的情况下，可以使用git stash存储该代码，以便后面进行开发。</p>
+<pre><code>git stash // 代码存储
+git stash list // 存储查看
+git stash apply // 恢复，stash不删除
+git stash drop // 删除stash
+git stash pop // 恢复并删除stash</code></pre><p>（2）git fetch和git pull的区别</p>
+<pre><code>git fetch // 只是更新代码
+git pull // 更新合并代码，git pull = git fetch + git merge</code></pre><p>（3）git clean和git reset的区别，两者一般配合使用</p>
+<pre><code>git reset --hard // 删除track的文件
+git clean -n // 提醒会被删除的文件
+git clean -f // 删除当前没有track的文件,忽略.gitignore里指定的文件
+git clean -f &lt;xxxx&gt;
+git clean -df // 删除当前目录没有被track的文件和文件夹
+git clean -xf // 删除所有没有被track的文件和文件夹</code></pre></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-06-12</span><i class="fa fa-tag"></i></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2017/10/29/git%E8%BF%81%E5%BA%93%E6%93%8D%E4%BD%9C/" title="git迁库操作">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2017/04/03/css3%E5%8A%A8%E7%94%BB/" title="css3动画">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
